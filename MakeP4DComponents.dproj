@@ -8,7 +8,7 @@
         <Platform Condition="'$(Platform)'==''">Win64</Platform>
         <TargetedPlatforms>37915</TargetedPlatforms>
         <AppType>Application</AppType>
-        <MainSource>MakePythonComponents.dpr</MainSource>
+        <MainSource>MakeP4DComponents.dpr</MainSource>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
         <Base>true</Base>
@@ -101,7 +101,7 @@
         <AUP_READ_PHONE_STATE>true</AUP_READ_PHONE_STATE>
         <Icon_MainIcon>$(BDS)\bin\delphi_PROJECTICON.ico</Icon_MainIcon>
         <Icns_MainIcns>$(BDS)\bin\delphi_PROJECTICNS.icns</Icns_MainIcns>
-        <SanitizedProjectName>MakePythonComponents</SanitizedProjectName>
+        <SanitizedProjectName>MakeP4DComponents</SanitizedProjectName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Android)'!=''">
         <DCC_UsePackage>DBXSqliteDriver;RESTComponents;DBXInterBaseDriver;P4DPyTorch;tethering;P4DMatplotLib;P4DONNXRuntime;P4DMoviePy;P4DScikitLearn;bindcompfmx;P4DPyPackage;FmxTeeUI;fmx;FireDACIBDriver;dbexpress;IndyCore;Python;dsnap;P4DNumPy;FireDACCommon;P4DEnvironmentProject;RESTBackendComponents;soapserver;P4DOpenCV;bindengine;CloudService;P4DSciPy;P4DPSUtil;FireDACCommonDriver;inet;IndyIPCommon;bindcompdbx;P4DRemBG;IndyIPServer;P4DPillow;IndySystem;P4DPandas;P4DEnvironment;fmxFireDAC;FireDAC;FireDACSqliteDriver;P4DTensorFlow;FMXTee;soaprtl;DbxCommonDriver;xmlrtl;soapmidas;PythonFmx;rtl;DbxClientDriver;P4DKeras;CustomIPTransport;P4DBoto3;bindcomp;P4DH5Py;IndyIPClient;dbxcds;P4DNLTK;dsnapxml;dbrtl;IndyProtocols;P4DPyQT5;$(DCC_UsePackage)</DCC_UsePackage>
@@ -246,6 +246,9 @@
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <Icon_MainIcon>MakeP4DComponents_Icon2.ico</Icon_MainIcon>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -265,14 +268,15 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="Unit1.pas">
+        <DCCReference Include="ProjectUnit.pas">
             <Form>MainForm</Form>
             <FormType>fmx</FormType>
         </DCCReference>
-        <DCCReference Include="Unit2.pas">
-            <Form>Form2</Form>
+        <DCCReference Include="ComponentUnit.pas">
+            <Form>ComponentForm</Form>
             <FormType>fmx</FormType>
         </DCCReference>
+        <DCCReference Include="Settings.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -291,13 +295,17 @@
         <BorlandProject>
             <Delphi.Personality>
                 <Source>
-                    <Source Name="MainSource">MakePythonComponents.dpr</Source>
+                    <Source Name="MainSource">MakeP4DComponents.dpr</Source>
                 </Source>
+                <Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k270.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp270.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+                </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="3">
-                <DeployFile LocalName="Win64\Debug\MakePythonComponents.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="Win64\Debug\MakeP4DComponents.rsm" Configuration="Debug" Class="DebugSymbols">
                     <Platform Name="Win64">
-                        <RemoteName>MakePythonComponents.exe</RemoteName>
+                        <RemoteName>MakeP4DComponents.rsm</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -306,15 +314,21 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Win64\Release\MakePythonComponents.exe" Configuration="Release" Class="ProjectOutput">
+                <DeployFile LocalName="Win64\Debug\MakeP4DComponents.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win64">
-                        <RemoteName>MakePythonComponents.exe</RemoteName>
+                        <RemoteName>MakeP4DComponents.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Win32\Debug\MakePythonComponents.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="Win32\Debug\MakeP4DComponents.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
-                        <RemoteName>MakePythonComponents.exe</RemoteName>
+                        <RemoteName>MakeP4DComponents.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Win64\Release\MakeP4DComponents.exe" Configuration="Release" Class="ProjectOutput">
+                    <Platform Name="Win64">
+                        <RemoteName>MakeP4DComponents.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -365,12 +379,6 @@
                 </DeployFile>
                 <DeployFile LocalName="$(BDS)\Redist\iossimulator\libpcre.dylib" Class="DependencyModule">
                     <Platform Name="iOSSimulator">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="Win64\Debug\MakePythonComponents.rsm" Configuration="Debug" Class="DebugSymbols">
-                    <Platform Name="Win64">
-                        <RemoteName>MakePythonComponents.rsm</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
